@@ -8,7 +8,7 @@ export default function ClientServerTest() {
 
   const testPing = async () => {
     try {
-      const response = await fetch('/api/ping')
+      const response = await fetch(`${process.env.API_HOSTNAME}/api/ping`)
       const data = await response.json()
       setPingResponse(data.message)
     } catch (error) {
@@ -17,7 +17,7 @@ export default function ClientServerTest() {
   }
 
   useEffect(() => {
-    const socket = new WebSocket('ws://localhost/ws')
+    const socket = new WebSocket(`ws://${process.env.API_HOSTNAME}/ws`)
     setWs(socket)
     
     socket.onmessage = (event) => {
